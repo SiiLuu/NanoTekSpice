@@ -10,21 +10,23 @@ SRC	=	src/operators.cpp	\
 		src/component.cpp	\
 		src/gate.cpp
 
-OBJ 	=	$(SRC:.c=.o)
+OBJ 	=	$(SRC:.cpp=.o)
 
 NAME =  nanotekspice
 
-CFLAGS += -W -Wall -Wextra -pedantic -I./includes
+CPP = g++ -I./includes
+
+FLAGS += -W -Wall -Wextra
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
 		@echo "Compiling..."
-		@$(CC) -o $(NAME) $(OBJ) $(CFLAGS)
+		@$(CPP) -o $(NAME) $(OBJ) $(FLAGS)
 
-%.o : %.c
+%.o : %.cpp
 		@echo "Compiling $@..."
-		@$(CC) -o $@ -c $< $(CFLAGS)
+		@$(CPP) -o $@ -c $< $(FLAGS)
 
 clean:
 	@echo "removing *.o..."
