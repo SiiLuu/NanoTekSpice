@@ -7,52 +7,52 @@
 
 #include "IComponent.hpp"
 
-IComponent::State operator&&(IComponent::State a, IComponent::State b)
+nts::Tristate operator&&(nts::Tristate a, nts::Tristate b)
 {
-    if (a == IComponent::State::TRUE && b == IComponent::State::TRUE)
-        return (IComponent::State::TRUE);
-    else if ((a == IComponent::State::TRUE && b == IComponent::State::FALSE) || \
-             (a == IComponent::State::FALSE && b == IComponent::State::TRUE) || \
-             (a == IComponent::State::FALSE && b == IComponent::State::FALSE))
-        return (IComponent::State::FALSE);
-    else if ((a == IComponent::State::FALSE && b == IComponent::State::UNDEFINED) || \
-             (a == IComponent::State::UNDEFINED && b == IComponent::State::FALSE))
-        return (IComponent::State::FALSE);
-    return (IComponent::State::UNDEFINED);
+    if (a == nts::Tristate::TRUE && b == nts::Tristate::TRUE)
+        return (nts::Tristate::TRUE);
+    else if ((a == nts::Tristate::TRUE && b == nts::Tristate::FALSE) || \
+             (a == nts::Tristate::FALSE && b == nts::Tristate::TRUE) || \
+             (a == nts::Tristate::FALSE && b == nts::Tristate::FALSE))
+        return (nts::Tristate::FALSE);
+    else if ((a == nts::Tristate::FALSE && b == nts::Tristate::UNDEFINED) || \
+             (a == nts::Tristate::UNDEFINED && b == nts::Tristate::FALSE))
+        return (nts::Tristate::FALSE);
+    return (nts::Tristate::UNDEFINED);
 }
 
-IComponent::State operator||(IComponent::State a, IComponent::State b)
+nts::Tristate operator||(nts::Tristate a, nts::Tristate b)
 {
-    if (a == IComponent::State::TRUE && b == IComponent::State::TRUE)
-        return (IComponent::State::TRUE);
-    else if ((a == IComponent::State::TRUE && b == IComponent::State::FALSE) || \
-             (a == IComponent::State::FALSE && b == IComponent::State::TRUE))
-        return (IComponent::State::TRUE);
-    else if (a == IComponent::State::FALSE && b == IComponent::State::FALSE)
-        return (IComponent::State::FALSE);
-    else if ((a == IComponent::State::TRUE && b == IComponent::State::UNDEFINED) || \
-             (a == IComponent::State::UNDEFINED && b == IComponent::State::TRUE))
-        return (IComponent::State::TRUE);
-    return (IComponent::State::UNDEFINED);
+    if (a == nts::Tristate::TRUE && b == nts::Tristate::TRUE)
+        return (nts::Tristate::TRUE);
+    else if ((a == nts::Tristate::TRUE && b == nts::Tristate::FALSE) || \
+             (a == nts::Tristate::FALSE && b == nts::Tristate::TRUE))
+        return (nts::Tristate::TRUE);
+    else if (a == nts::Tristate::FALSE && b == nts::Tristate::FALSE)
+        return (nts::Tristate::FALSE);
+    else if ((a == nts::Tristate::TRUE && b == nts::Tristate::UNDEFINED) || \
+             (a == nts::Tristate::UNDEFINED && b == nts::Tristate::TRUE))
+        return (nts::Tristate::TRUE);
+    return (nts::Tristate::UNDEFINED);
 }
 
-IComponent::State operator^(IComponent::State a, IComponent::State b)
+nts::Tristate operator^(nts::Tristate a, nts::Tristate b)
 {
-    if (a == IComponent::State::TRUE && b == IComponent::State::TRUE)
-        return (IComponent::State::FALSE);
-    else if ((a == IComponent::State::TRUE && b == IComponent::State::FALSE) || \
-             (a == IComponent::State::FALSE && b == IComponent::State::TRUE))
-        return (IComponent::State::TRUE);
-    else if (a == IComponent::State::FALSE && b == IComponent::State::FALSE)
-        return (IComponent::State::FALSE);
-    return (IComponent::State::UNDEFINED);
+    if (a == nts::Tristate::TRUE && b == nts::Tristate::TRUE)
+        return (nts::Tristate::FALSE);
+    else if ((a == nts::Tristate::TRUE && b == nts::Tristate::FALSE) || \
+             (a == nts::Tristate::FALSE && b == nts::Tristate::TRUE))
+        return (nts::Tristate::TRUE);
+    else if (a == nts::Tristate::FALSE && b == nts::Tristate::FALSE)
+        return (nts::Tristate::FALSE);
+    return (nts::Tristate::UNDEFINED);
 }
 
-IComponent::State operator~(IComponent::State a)
+nts::Tristate operator~(nts::Tristate a)
 {
-    if (a == IComponent::State::TRUE)
-        return (IComponent::State::FALSE);
-    else if (a == IComponent::State::FALSE)
-        return (IComponent::State::TRUE);
-    return (IComponent::State::UNDEFINED);
+    if (a == nts::Tristate::TRUE)
+        return (nts::Tristate::FALSE);
+    else if (a == nts::Tristate::FALSE)
+        return (nts::Tristate::TRUE);
+    return (nts::Tristate::UNDEFINED);
 }

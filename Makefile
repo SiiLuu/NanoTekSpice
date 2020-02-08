@@ -8,7 +8,8 @@
 SRC	=	src/operators.cpp	\
 		src/circuit.cpp		\
 		src/component.cpp	\
-		src/gate.cpp
+		src/gate.cpp		\
+		src/main.cpp
 
 OBJ 	=	$(SRC:.cpp=.o)
 

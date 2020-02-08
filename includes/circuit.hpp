@@ -5,16 +5,21 @@
 ** circuit.hpp
 */
 
+#include "IComponent.hpp"
+
 #ifndef CIRCUIT_HPP_
 #define CIRCUIT_HPP_
 
-class Circuit {
+class Circuit : public nts::IComponent {
     public:
         Circuit();
         ~Circuit();
+        void DisplayPrompt() const;
+        void StartSimulation();
 
     protected:
     private:
+        std::string _line;
 };
 
 #endif /* !CIRCUIT_HPP_ */
