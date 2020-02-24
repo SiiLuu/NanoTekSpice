@@ -21,13 +21,13 @@ int parsing(char **argv)
     if (found > 0) {
         for(std::string line; getline(input,line);)
             tabFile.push_back(line);
-        for(size_t size = 0; size <= tabFile.size(); size++) {
+        for(size_t size = 0; size <= (tabFile.size() - 1); size++) {
             if (tabFile[size][0] != '#') {
-                if (tabFile[size] == ".chipsets") {
-                    for (;tabFile[size] != ".links"; size++)
+                if (tabFile[size] == ".chipsets:") {
+                    for (;tabFile[size] != ".links:"; size++)
                         chipsets.push_back(tabFile[size]);
                 }
-                if (tabFile[size] == ".links") {
+                if (!tabFile[size].compare(".links:")) {
                     for (;size <= tabFile.size(); size++)
                         links.push_back(tabFile[size]);
                 }
@@ -35,4 +35,11 @@ int parsing(char **argv)
         }
     } else
         throw;
+    for(size_t size = 0; size <= (tabFile.size() - 1); size++)
+        std::cout << "tabFile: " << tabFile[size] << std::endl;
+    for(size_t size = 0; size <= (chipsets.size() - 1); size++)
+        std::cout << "chipsets: " << chipsets[size] << std::endl;
+    for(size_t size = 0; size <= (links.size() - 1); size++)
+        std::cout << "links: " << links[size] << std::endl;
+    return (1);
 }
