@@ -7,6 +7,7 @@
 
 SRC	=	src/operators.cpp	\
 		src/circuit.cpp		\
+		src/action.cpp		\
 		src/component.cpp	\
 		src/gate.cpp		\
 		src/parse.cpp		\
