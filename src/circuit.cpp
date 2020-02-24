@@ -5,22 +5,36 @@
 ** circuit.cpp
 */
 
+#include <signal.h>
+#include <stdbool.h>
 #include "circuit.hpp"
 
 Circuit::Circuit() {}
 
 Circuit::~Circuit() {}
 
-void Circuit::DisplayPrompt() const
-{
-    std::cout << "> ";
-}
-
 void Circuit::StartSimulation()
 {
-    this->DisplayPrompt();
+    std::cout << "FDP" << std::endl;
+    DisplayPrompt();
     while (std::getline(std::cin, _line) && _line != "exit") {
-        this->DisplayPrompt();
-        
+        if (_line == "display") {
+            display();
+            DisplayPrompt();
+        }
+        else if (_line == "simulate") {
+            simulate();
+            DisplayPrompt();
+        }
+        else if (_line == "loop") {
+            loop();
+            DisplayPrompt();
+        }
+        else if (_line == "dump") {
+            dump();
+            DisplayPrompt();
+        }
+        else
+            DisplayPrompt();
     }
 }

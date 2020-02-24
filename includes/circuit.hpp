@@ -14,7 +14,11 @@ class Circuit : public nts::IComponent {
     public:
         Circuit();
         ~Circuit();
-        void DisplayPrompt() const;
+        void DisplayPrompt();
+        void display();
+        void simulate();
+        void loop();
+        void dump();
         void StartSimulation();
 
     protected:
