@@ -17,13 +17,7 @@ class Circuit : public nts::IComponent {
     public:
         Circuit();
         ~Circuit();
-        void DisplayPrompt();
-        void display();
-        void simulate();
-        void loop();
-        void dump();
         void StartSimulation();
-        int parsing(char **);
         std::vector<std::string> tabFile;
         std::vector<std::string> chipsets;
         std::vector<std::string> links;
@@ -31,6 +25,13 @@ class Circuit : public nts::IComponent {
     protected:
     private:
         std::string _line;
+        void DisplayPrompt();
+        void display();
+        void simulate();
+        void loop();
+        void dump();
+        static void sig_handler(int );
+        int parsing(char **);
 };
 
 #endif /* !CIRCUIT_HPP_ */

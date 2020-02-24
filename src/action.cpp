@@ -5,16 +5,16 @@
 ** circuit.cpp
 */
 
-#include <signal.h>
+#include <csignal>
 #include <stdbool.h>
 #include "circuit.hpp"
 
-volatile int g_running = 1;
+bool LOOP = true;
 
-void  sig_handler(int signum)
+void  Circuit::sig_handler(int signum)
 {
     if (signum == SIGINT)
-        g_running = 0;
+        LOOP = false;
 }
 
 void Circuit::DisplayPrompt()
@@ -34,8 +34,8 @@ void  Circuit::simulate()
 
 void  Circuit::loop()
 {
-    signal(SIGINT, &sig_handler);
-    while (g_running) {
+    std::signal(SIGINT, &Circuit::sig_handler);
+    while (LOOP) {
         simulate();
     }
 }
