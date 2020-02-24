@@ -9,6 +9,7 @@ SRC	=	src/operators.cpp	\
 		src/circuit.cpp		\
 		src/component.cpp	\
 		src/gate.cpp		\
+		src/parse.cpp		\
 		src/main.cpp
 
 OBJ 	=	$(SRC:.cpp=.o)
