@@ -7,7 +7,7 @@
 
 #include "circuit.hpp"
 
-int main(void)
+int main(int argc, char **argv)
 {
     Circuit circ;
 

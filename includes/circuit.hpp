@@ -6,6 +6,9 @@
 */
 
 #include "IComponent.hpp"
+#include <vector>
+#include <iostream>
+#include <fstream>
 
 #ifndef CIRCUIT_HPP_
 #define CIRCUIT_HPP_
@@ -20,6 +23,10 @@ class Circuit : public nts::IComponent {
         void loop();
         void dump();
         void StartSimulation();
+        int parsing(char **);
+        std::vector<std::string> tabFile;
+        std::vector<std::string> chipsets;
+        std::vector<std::string> links;
 
     protected:
     private:
