@@ -5,12 +5,12 @@
 ## Makefile
 ##
 
-SRC	=	src/operators.cpp	\
-		src/circuit.cpp		\
-		src/action.cpp		\
-		src/component.cpp	\
-		src/gate.cpp		\
-		src/parse.cpp		\
+SRC	=	src/circuit.cpp			\
+		src/action.cpp			\
+		src/component.cpp		\
+		src/gate.cpp			\
+		src/parse.cpp			\
+		src/component/4081.cpp 	\
 		src/main.cpp
 
 OBJ 	=	$(SRC:.cpp=.o)
@@ -34,6 +34,7 @@ $(NAME):	$(OBJ)
 clean:
 	@echo "removing *.o..."
 	@rm -f src/*.o
+	@rm -f src/component/*.o
 	@rm -f *.o
 
 fclean:	clean
