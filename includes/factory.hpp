@@ -5,16 +5,18 @@
 ** factory.hpp
 */
 
-#include "component.hpp"
-
 #ifndef FACTORY_HPP_
 #define FACTORY_HPP_
 
-class Factory : Component {
+#include <iostream>
+#include "4081.hpp"
+#include "component.hpp"
+
+class Factory {
     public:
         Factory();
         ~Factory();
-        Component createComponent(std::string Name);
+        static Component *createComponent(int type);
 
     protected:
     private:

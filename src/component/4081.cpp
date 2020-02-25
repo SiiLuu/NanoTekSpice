@@ -7,9 +7,7 @@
 
 #include "4081.hpp"
 
-_4081::_4081 ()
+void _4081::dump()
 {
-    this->setName("4081");
+    std::cout << "Dump 4081" << std::endl;
 }
-
-_4081::~_4081 () {}

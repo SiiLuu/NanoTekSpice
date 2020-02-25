@@ -10,6 +10,7 @@ SRC	=	src/circuit.cpp			\
 		src/component.cpp		\
 		src/gate.cpp			\
 		src/parse.cpp			\
+		src/factory.cpp			\
 		src/component/4081.cpp 	\
 		src/main.cpp
 

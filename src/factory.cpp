@@ -11,4 +11,22 @@ Factory::Factory() {}
 
 Factory::~Factory() {}
 
-Component Factory::createComponent(std::string Name) {}
+Component *Factory::createComponent(int type)
+{
+	Component *component = nullptr;
+	
+	switch(type) {
+		case 4081:{
+			component = new _4081;
+			break;
+		}
+		default:{
+			std::cout << "invalid" << std::endl;
+			return nullptr;
+		}
+	}
+
+	component->dump();
+	
+	return component;
+}

@@ -33,6 +33,9 @@ class Circuit : public nts::IComponent {
         void loop();
         void dump();
         static void sig_handler(int );
+        void find_chipsets_and_links();
+        void find_links(size_t);
+        void find_chipsets(size_t);
 };
 
 #endif /* !CIRCUIT_HPP_ */

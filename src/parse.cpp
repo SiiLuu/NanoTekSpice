@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <cstring>
 
-/*std::string removeBadChar (std::string str)
+std::string removeBadChar (std::string str)
 {
     std::string newStr;
     size_t size = 0;
@@ -28,7 +28,7 @@
     return (newStr);
 }
 
-void find_chipsets()
+void Circuit::find_chipsets(size_t size)
 {
     if (size > 0 && strcmp(this->tabFile[size - 1].c_str(), ".chipsets:") == 0) {
         for (;strcmp(this->tabFile[size + 1].c_str(), ".links:") != 0; size++)
@@ -36,7 +36,7 @@ void find_chipsets()
     }
 }
 
-void find_links()
+void Circuit::find_links(size_t size)
 {
     if (size > 0 && strcmp(this->tabFile[size - 1].c_str(), ".links:") == 0) {
         for (;size <= (this->tabFile.size() - 1); size++)
@@ -44,12 +44,12 @@ void find_links()
     }
 }
 
-void find_chipsets_and_links()
+void Circuit::find_chipsets_and_links()
 {
     for(size_t size = 0; size <= (this->tabFile.size() - 1); size++) {
         if (this->tabFile[size][0] != '#') {
-            find_chipsets();
-            find_links();
+            find_chipsets(size);
+            find_links(size);
         }
     }
 }
@@ -65,8 +65,7 @@ void Circuit::parsing(char **argv)
             line = removeBadChar(line);
             this->tabFile.push_back(line);
         }
-        find_chipsets_links();
+        find_chipsets_and_links();
     } else
         throw;
-    return (1);
-}*/
+}

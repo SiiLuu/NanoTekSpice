@@ -8,6 +8,7 @@
 #include <csignal>
 #include <stdbool.h>
 #include "circuit.hpp"
+#include "factory.hpp"
 
 bool LOOP = true;
 
@@ -42,5 +43,5 @@ void  Circuit::loop()
 
 void  Circuit::dump()
 {
-
+    Component *component = Factory::createComponent(4081);
 }

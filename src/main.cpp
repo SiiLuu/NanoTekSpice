@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 {
     Circuit circ;
 
+    circ.parsing(argv);
     circ.StartSimulation();
-    //circ.parsing(argv);
     return (0);
 }

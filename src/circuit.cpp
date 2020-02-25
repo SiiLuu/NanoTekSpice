@@ -8,6 +8,7 @@
 #include <signal.h>
 #include <stdbool.h>
 #include "circuit.hpp"
+#include "factory.hpp"
 
 Circuit::Circuit() {}
 
