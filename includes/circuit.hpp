@@ -21,6 +21,7 @@ class Circuit : public nts::IComponent {
         std::vector<std::string> tabFile;
         std::vector<std::string> chipsets;
         std::vector<std::string> links;
+        void parsing(char **);
 
     protected:
     private:
@@ -31,7 +32,10 @@ class Circuit : public nts::IComponent {
         void loop();
         void dump();
         static void sig_handler(int );
-        int parsing(char **);
+        void find_chipsets_and_links();
+        void find_links(size_t);
+        void find_chipsets(size_t);
 };
-
+// WESH HUGO C4EST HUGO DU PASSER 
+// PENSE A RAJOUTER LES FONCTIONS 
 #endif /* !CIRCUIT_HPP_ */
