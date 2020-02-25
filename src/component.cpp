@@ -6,3 +6,13 @@
 */
 
 #include "component.hpp"
+
+std::string Component::getName()
+{
+    return (name);
+}
+
+void Component::setName(std::string Name)
+{
+    name = Name;
+}
