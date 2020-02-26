@@ -12,6 +12,7 @@ SRC	=	src/circuit.cpp			\
 		src/parse.cpp			\
 		src/factory.cpp			\
 		src/component/4081.cpp 	\
+		src/error_handler.cpp 	\
 		src/main.cpp
 
 OBJ 	=	$(SRC:.cpp=.o)
