@@ -11,8 +11,9 @@ int main(int argc, char **argv)
 {
     Circuit circ;
 
-    circ.parsing(argv);
-    (void)argc;
+    std::vector<std::string> av(argv + 1, argv + argc);
+    if (circ.parsing(argc, av) == 84)
+        return (84);
     circ.StartSimulation();
     return (0);
 }

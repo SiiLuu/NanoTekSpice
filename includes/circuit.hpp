@@ -18,8 +18,7 @@ class Circuit {
         Circuit();
         ~Circuit();
         void StartSimulation();
-        void parsing(char **);
-        
+        int parsing(int, std::vector<std::string>);
         std::vector<std::string> tabFile;
         std::vector<std::string> chipsets;
         std::vector<std::string> links;

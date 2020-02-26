@@ -54,8 +54,38 @@ void Circuit::find_chipsets_and_links()
     }
 }
 
-void Circuit::parsing(char **argv)
+int check_good_value(std::string str)
 {
+    bool good = false;
+
+    for (size_t i = 0; i <= str.length(); i++) {
+        if (str[i] == '=')
+            good = true;
+        if (good) {
+            if (isdigit(str[i]) == 0)
+                return (84);
+        }
+    }
+    return (1);
+}
+
+int check_good_arguments(int argc, std::vector<std::string> argv)
+{
+    if (argc < 2) {
+        std::cout << "File is missing" << std::endl;
+        return (84);
+    }
+    for (int i = 2; i < argc; i++)
+        if (check_good_value(argv[i]) == 84)
+            return (84);
+    return (1);
+}
+
+int Circuit::parsing(int argc, std::vector<std::string> argv)
+{
+    //if (check_good_arguments(argc, argv) == 84)
+    //    return (84);
+
     std::string toFind = argv[1];
     size_t found = toFind.find(".nts");
     std::ifstream input(argv[1]);
@@ -67,5 +97,6 @@ void Circuit::parsing(char **argv)
         }
         find_chipsets_and_links();
     } else
-        throw;
+        return (84);
+    return (1);
 }
