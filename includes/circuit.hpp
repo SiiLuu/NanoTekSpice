@@ -13,7 +13,7 @@
 #include <iostream>
 #include <fstream>
 
-class Circuit : public nts::IComponent {
+class Circuit {
     public:
         Circuit();
         ~Circuit();

@@ -30,7 +30,7 @@ void Circuit::display()
 
 void  Circuit::simulate()
 {
-
+    
 }
 
 void  Circuit::loop()

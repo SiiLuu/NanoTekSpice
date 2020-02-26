@@ -7,7 +7,16 @@
 
 #include "4081.hpp"
 
+_4081::_4081()
+{
+    setName("4081");
+    //setInput("a");
+    //setOutput("b");
+}
+
+_4081::~_4081() {}
+
 void _4081::dump()
 {
-    std::cout << "Dump 4081" << std::endl;
+    std::cout << getName() << " Dumped" << std::endl;
 }
