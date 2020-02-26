@@ -23,6 +23,7 @@ class Circuit {
         std::vector<std::string> tabFile;
         std::vector<std::string> chipsets;
         std::vector<std::string> links;
+        void parsing(char **);
 
     protected:
     private:
@@ -37,5 +38,6 @@ class Circuit {
         void find_links(size_t);
         void find_chipsets(size_t);
 };
-
+// WESH HUGO C4EST HUGO DU PASSER 
+// PENSE A RAJOUTER LES FONCTIONS 
 #endif /* !CIRCUIT_HPP_ */
