@@ -12,6 +12,7 @@ int main(int argc, char **argv)
     Circuit circ;
 
     circ.parsing(argv);
+    (void)argc;
     circ.StartSimulation();
     return (0);
 }
