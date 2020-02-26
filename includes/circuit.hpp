@@ -23,7 +23,6 @@ class Circuit {
         std::vector<std::string> tabFile;
         std::vector<std::string> chipsets;
         std::vector<std::string> links;
-        void parsing(char **);
 
     protected:
     private:
