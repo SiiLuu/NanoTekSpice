@@ -20,6 +20,22 @@ Component *Factory::createComponent(int type, Parser *parse)
 			component = new _4081(parse);
 			break;
 		}
+		case 4030:{
+			component = new _4030(parse);
+			break;
+		}
+		case 4071:{
+			component = new _4071(parse);
+			break;
+		}
+		case 4001:{
+			component = new _4001(parse);
+			break;
+		}
+		case 4011:{
+			component = new _4011(parse);
+			break;
+		}
 		default:{
 			std::cout << "invalid" << std::endl;
 			return nullptr;
