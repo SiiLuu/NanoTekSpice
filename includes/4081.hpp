@@ -8,6 +8,7 @@
 #ifndef _4081_HPP_
 #define _4081_HPP_
 
+#include "gate.hpp"
 #include "component.hpp"
 
 class _4081 : public Component {
@@ -15,6 +16,8 @@ class _4081 : public Component {
         _4081();
         ~_4081();
         void dump();
+        void display();
+        void simulate();
 
     protected:
     private:

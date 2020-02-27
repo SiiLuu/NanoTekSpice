@@ -25,13 +25,10 @@ class Circuit {
         std::vector<std::string> links;
 
     protected:
+        
     private:
         std::string _line;
         void DisplayPrompt();
-        void display();
-        void simulate();
-        void loop();
-        void dump();
         static void sig_handler(int );
         void find_chipsets_and_links();
         void find_links(size_t);

@@ -14,11 +14,6 @@ class Gate : Component {
     public:
         Gate();
         ~Gate();
-        nts::Tristate and_gate(nts::Tristate a, nts::Tristate b);
-        nts::Tristate or_gate(nts::Tristate a, nts::Tristate b);
-        nts::Tristate not_gate(nts::Tristate a);
-        nts::Tristate xor_gate(nts::Tristate a, nts::Tristate b);
-
 
     protected:
     private:

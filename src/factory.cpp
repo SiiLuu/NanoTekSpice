@@ -25,8 +25,5 @@ Component *Factory::createComponent(int type)
 			return nullptr;
 		}
 	}
-
-	component->dump();
-	
 	return component;
 }

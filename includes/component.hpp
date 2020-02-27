@@ -10,22 +10,44 @@
 
 #include "circuit.hpp"
 
-class Component : Circuit {
+class Component : public Circuit {
     public:
         virtual void dump() = 0;
+        virtual void display() = 0;
+        virtual void simulate() = 0;
 
     protected:
         std::string getName();
         void setName(std::string Name);
-        //std::string getInput();
-        //void setInput(std::string Input);
-        //std::string getOutput();
-        //void setOutput(std::string Output);
+        size_t getnbInputs();
+        size_t getnbOutputs();
+
+        std::string getInputsName(int i);
+        void setInputsName(std::vector<std::string> Inputs);
+        nts::Tristate getInputsValue(int i);
+        void setInputsValue(std::vector<nts::Tristate> value);
+        
+        std::string getOutputsName(int i);
+        void setOutputsName(std::vector<std::string> Inputs);
+        nts::Tristate getOutputsValue(int i);
+        void setOutputsValue(std::vector<nts::Tristate> value);
+
+        nts::Tristate and_gate(nts::Tristate a, nts::Tristate b);
+        nts::Tristate or_gate(nts::Tristate a, nts::Tristate b);
+        nts::Tristate not_gate(nts::Tristate a);
+        nts::Tristate xor_gate(nts::Tristate a, nts::Tristate b);
 
     private:
         std::string name;
-        nts::Tristate input;
-        nts::Tristate output;
+
+        std::vector<std::string> inputsName;
+        std::vector<nts::Tristate> inputValue;
+
+        std::vector<std::string> OutputsName;
+        std::vector<nts::Tristate> OutputsValue;
+
+        size_t nb;
+        size_t nbO;
 };
 
 #endif /* !COMPONENT_HPP_ */
