@@ -9,44 +9,45 @@
 
 _4081::_4081(Parser *parse)
 {
-    std::map<std::string, nts::Tristate>::iterator it = parse->input.begin();
-    setName("4081");
-    setInputsName({it->first});
-    setOutputsName({"s"});
-    setInputsValue({nts::Tristate::TRUE, nts::Tristate::FALSE});
-    setOutputsValue({nts::Tristate::UNDEFINED});
+    this->_parse = parse;
 }
 
 _4081::~_4081() {}
 
 void _4081::dump()
 {
-    std::cout << getName() << " Dumped" << std::endl;
-    for (size_t i = 0; i < getnbInputs(); i++) {
-        if (getInputsValue(i) == nts::Tristate::UNDEFINED)
-            std::cout << getInputsName(i) << "=" << "U" << std::endl;
+    std::map<std::string, nts::Tristate>::iterator itI = _parse->input.begin();
+    std::map<std::string, nts::Tristate>::iterator itO = _parse->output.begin();
+    std::cout << "4081" << " Dumped" << std::endl;
+    for(; itI != _parse->input.end(); ++itI) {
+        if (itI->second == -1)
+            std::cout << itI->first << "=U" << std::endl;
         else
-            std::cout << getInputsName(i) << "=" << getInputsValue(i) << std::endl;
+            std::cout << itI->first << "=" << itI->second << std::endl;
     }
-    for (size_t i = 0; i < getnbOutputs(); i++) {
-        if (getOutputsValue(i) == nts::Tristate::UNDEFINED)
-            std::cout << getOutputsName(i) << "=" << "U" << std::endl;
+    for(; itO != _parse->output.end(); ++itO) {
+        if (itO->second == -1)
+            std::cout << itO->first << "=U" << std::endl;
         else
-            std::cout  << getOutputsName(i) << "=" << getOutputsValue(i) << std::endl;
+            std::cout << itO->first << "=" << itO->second << std::endl;
     }
 }
 
 void _4081::display()
 {
-    for (size_t i = 0; i < getnbOutputs(); i++) {
-        if (getOutputsValue(i) == nts::Tristate::UNDEFINED)
-            std::cout << getOutputsName(i) << "=" << "U" << std::endl;
+    std::map<std::string, nts::Tristate>::iterator itO = _parse->output.begin();
+    for(; itO != _parse->output.end(); ++itO) {
+        if (itO->second == -1)
+            std::cout << itO->first << "=U" << std::endl;
         else
-            std::cout << getOutputsName(i) << "=" << getOutputsValue(i) << std::endl;
+            std::cout << itO->first << "=" << itO->second << std::endl;
     }
 }
 
 void _4081::simulate()
 {
-    setOutputsValue({and_gate(getInputsValue(0), getInputsValue(1))});
+    //std::map<std::string, nts::Tristate>::iterator itI = parse->output.begin();
+    //std::map<std::string, nts::Tristate>::iterator itO = parse->output.begin();
+    //itO->second = and_gate();
+    //setOutputsValue({and_gate(getInputsValue(0), getInputsValue(1))});
 }

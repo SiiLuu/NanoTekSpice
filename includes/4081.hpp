@@ -15,6 +15,7 @@ class _4081 : public Component {
     public:
         _4081(Parser *);
         ~_4081();
+        Parser *_parse;
         void dump();
         void display();
         void simulate();
