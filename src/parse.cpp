@@ -153,17 +153,11 @@ void Parser::find_chipsets_and_links()
     }
 }
 
-int Parser::getI(void)
-{
-    return (this->i);
-}
-
 int Parser::parsing(int argc, std::vector<std::string> argv)
 {
     std::fstream input;
     int check_is_good = 0;
 
-    this->i = 0;
     if (check_good_arguments(argc, argv) == 84)
         return (84);
     input.open(argv[1]);

@@ -33,7 +33,7 @@ int Circuit::StartSimulation(int argc, std::vector<std::string> argv)
     if (this->parse->parsing(argc, argv) == 84)
         return (84);
     std::signal(SIGINT, &Circuit::sig_handler);
-    Component *component = Factory::createComponent(4081);/*
+    Component *component = Factory::createComponent(4081, this->parse);
     component->simulate();
     component->display();
     DisplayPrompt();
@@ -57,6 +57,6 @@ int Circuit::StartSimulation(int argc, std::vector<std::string> argv)
         }
         else
             DisplayPrompt();
-    }*/
+    }
     return (1);
 }

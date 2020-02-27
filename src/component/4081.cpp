@@ -7,11 +7,11 @@
 
 #include "4081.hpp"
 
-_4081::_4081()
+_4081::_4081(Parser *parse)
 {
-    std::cout << "ici: " << this->parse->getI() << std::endl;
+    std::map<std::string, nts::Tristate>::iterator it = parse->input.begin();
     setName("4081");
-    setInputsName({"a", "b"});
+    setInputsName({it->first});
     setOutputsName({"s"});
     setInputsValue({nts::Tristate::TRUE, nts::Tristate::FALSE});
     setOutputsValue({nts::Tristate::UNDEFINED});

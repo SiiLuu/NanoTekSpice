@@ -22,8 +22,8 @@ class Parser {
         std::map<std::string, nts::Tristate> output;
         std::map<std::string, std::string> links;
         int getI(void);
+        int setI(void);
         int parsing(int, std::vector<std::string>);
-        int i;
 
     protected:
     private:

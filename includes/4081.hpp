@@ -13,7 +13,7 @@
 
 class _4081 : public Component {
     public:
-        _4081();
+        _4081(Parser *);
         ~_4081();
         void dump();
         void display();

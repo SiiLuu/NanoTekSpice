@@ -16,7 +16,7 @@ class Factory {
     public:
         Factory();
         ~Factory();
-        static Component *createComponent(int type);
+        static Component *createComponent(int type, Parser *);
 
     protected:
     private:
