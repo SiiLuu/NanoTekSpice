@@ -9,63 +9,176 @@
 #include <algorithm>
 #include <cstring>
 
-std::string removeBadChar (std::string str)
+bool Circuit::add_input_map(std::string str, int nbr)
 {
-    std::string newStr;
-    size_t size = 0;
+    bool error = true;
 
-    for (; size <= str.length(); size++) {
-        if (str[size] && (str[size] == ' ' || str[size] == '\t')) {
-            for (; str[size] && (str[size] == ' ' || str[size] == '\t'); size++) {
-                if (str[size + 1] != ' ' && str[size + 1] != '\t') {
-                    str[size] = ' ';
-                    break;
-                }
-            }
+    if (nbr >= 2)
+        return (true);
+    for(auto it = this->input.begin(); it != this->input.end(); ++it) {
+        if (it->first.find(str) == 0) {
+            it->second = static_cast<nts::Tristate>(nbr);
+            error = false;
         }
-        newStr += str[size];
     }
-    return (newStr);
+    if (error == true) {
+        std::cout << "Error input" << std::endl;
+        return (true);
+    }
+    return (false);
+}
+
+int Circuit::put_input(int argc, std::vector<std::string> argv)
+{
+    bool good = false;
+    bool error = false;
+    std::string str;
+    std::string nbr;
+
+    if (argc == 2)
+        return (1);
+    for (int t = 2; t < argc; t++) {
+        str.clear();
+        nbr.clear();
+        good = false;
+        for (size_t i = 0; i <= argv[t].length(); i++) {
+            if (argv[t][i] == '=') {
+                i++;
+                good = true;
+            }
+            if (!good)
+                str += argv[t][i];
+            else
+                nbr += argv[t][i];
+        }
+        error = add_input_map(str, std::stoi(nbr));
+    }
+    if (good && !error)
+        return (1);
+    return (84);
+}
+
+void Circuit::find_gate(size_t size)
+{
+    std::string nbr;
+    std::string name;
+    bool space = false;
+
+    if (isdigit(this->tabFile[size][0])) {
+        for (int i = 0; this->tabFile[size][i] != '\0'; i++) {
+            if (this->tabFile[size][i] == ' ') {
+                space = true;
+                i++;
+            }
+            if (!space)
+                nbr += this->tabFile[size][i];
+            else
+                name += this->tabFile[size][i];
+        }
+    }
+    if (space)
+        this->chipsets.insert(std::pair<std::string, int>(name, std::stoi(nbr)));
+}
+
+void Circuit::find_input(size_t size)
+{
+    std::string name;
+    bool found = false;
+    int i = 0;
+
+    if (strncmp(this->tabFile[size].c_str(), "input", 5) == 0) {
+        for (; this->tabFile[size][i] != ' '; i++);
+        i++;
+        for (; this->tabFile[size][i] != '\0' && this->tabFile[size][i] != ' '; i++)
+            name += this->tabFile[size][i];
+        found = true;
+    }
+    if (found)
+        this->input.insert(std::pair<std::string, nts::Tristate>(name, nts::Tristate::UNDEFINED));
+}
+
+void Circuit::find_output(size_t size)
+{
+    std::string name;
+    bool found = false;
+    int i = 0;
+
+    if (strncmp(this->tabFile[size].c_str(), "output", 6) == 0) {
+        for (; this->tabFile[size][i] != ' '; i++);
+        i++;
+        for (; this->tabFile[size][i] != '\0' && this->tabFile[size][i] != ' '; i++)
+            name += this->tabFile[size][i];
+        found = true;
+    }
+    if (found)
+        this->output.insert(std::pair<std::string, nts::Tristate>(name, nts::Tristate::UNDEFINED));
+}
+
+void Circuit::find_links_gate(size_t size)
+{
+    std::string str1;
+    std::string str2;
+    size_t i = 0;
+
+    for (; this->tabFile[size][i] != ' '; i++)
+        str1 += this->tabFile[size][i];
+    i++;
+    for (; this->tabFile[size][i] != '\0'; i++)
+        str2 += this->tabFile[size][i];
+    this->links.insert(std::pair<std::string, std::string>(str1, str2));
 }
 
 void Circuit::find_chipsets(size_t size)
 {
-    if (size > 0 && strcmp(this->tabFile[size - 1].c_str(), ".chipsets:") == 0) {
-        for (;strcmp(this->tabFile[size + 1].c_str(), ".links:") != 0; size++)
-            this->chipsets.push_back(this->tabFile[size]);
-    }
+    if (size > 0 && strcmp(this->tabFile[size - 1].c_str(), ".chipsets:") == 0)
+        for (;strcmp(this->tabFile[size].c_str(), ".links:") != 0; size++) {
+            find_gate(size);
+            find_input(size);
+            find_output(size);
+        }
 }
 
 void Circuit::find_links(size_t size)
 {
-    if (size > 0 && strcmp(this->tabFile[size - 1].c_str(), ".links:") == 0) {
+    if (size > 0 && strcmp(this->tabFile[size - 1].c_str(), ".links:") == 0)
         for (;size <= (this->tabFile.size() - 1); size++)
-            this->links.push_back(this->tabFile[size]);
-    }
+            find_links_gate(size);
 }
 
 void Circuit::find_chipsets_and_links()
 {
     for(size_t size = 0; size <= (this->tabFile.size() - 1); size++) {
-        if (this->tabFile[size][0] != '#') {
-            find_chipsets(size);
-            find_links(size);
-        }
+        find_chipsets(size);
+        find_links(size);
     }
 }
 
-void Circuit::parsing(char **argv)
+int Circuit::parsing(int argc, std::vector<std::string> argv)
 {
-    std::string toFind = argv[1];
-    size_t found = toFind.find(".nts");
-    std::ifstream input(argv[1]);
+    std::fstream input;
+    int check_is_good = 0;
 
-    if (found > 0) {
+    if (check_good_arguments(argc, argv) == 84)
+        return (84);
+    input.open(argv[1]);
+    if (input && !input.fail()) {
         for(std::string line; getline(input,line);) {
             line = removeBadChar(line);
-            this->tabFile.push_back(line);
+            if (strcmp(line.c_str(), "") == 0)
+                continue;
+            if (line[0] != '#')
+                this->tabFile.push_back(line);
+            if (strcmp(line.c_str(), ".links:") == 0 || strcmp(line.c_str(), ".chipsets:") == 0)
+                check_is_good++;
         }
         find_chipsets_and_links();
-    } else
-        throw;
+    } else {
+        std::cout << "Bad file" << std::endl;
+        return (84);
+    }
+    if (put_input(argc, argv) == 84)
+        return (84);
+    if (check_is_good != 2)
+        return (84);
+    return (1);
 }
