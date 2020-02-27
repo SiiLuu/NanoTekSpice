@@ -44,6 +44,8 @@ class Circuit {
         void find_input(size_t size);
         void find_output(size_t size);
         void find_links_gate(size_t size);
+        bool add_input_map(std::string, int);
+        int put_input(int, std::vector<std::string>);
 };
 
 int check_good_value(std::string str);

@@ -9,6 +9,55 @@
 #include <algorithm>
 #include <cstring>
 
+bool Circuit::add_input_map(std::string str, int nbr)
+{
+    bool error = true;
+
+    if (nbr >= 2)
+        return (true);
+    for(auto it = this->input.begin(); it != this->input.end(); ++it) {
+        if (it->first.find(str) == 0) {
+            it->second = static_cast<nts::Tristate>(nbr);
+            error = false;
+        }
+    }
+    if (error == true) {
+        std::cout << "Error input" << std::endl;
+        return (true);
+    }
+    return (false);
+}
+
+int Circuit::put_input(int argc, std::vector<std::string> argv)
+{
+    bool good = false;
+    bool error = false;
+    std::string str;
+    std::string nbr;
+
+    if (argc == 2)
+        return (1);
+    for (int t = 2; t < argc; t++) {
+        str.clear();
+        nbr.clear();
+        good = false;
+        for (size_t i = 0; i <= argv[t].length(); i++) {
+            if (argv[t][i] == '=') {
+                i++;
+                good = true;
+            }
+            if (!good)
+                str += argv[t][i];
+            else
+                nbr += argv[t][i];
+        }
+        error = add_input_map(str, std::stoi(nbr));
+    }
+    if (good && !error)
+        return (1);
+    return (84);
+}
+
 void Circuit::find_gate(size_t size)
 {
     std::string nbr;
@@ -82,7 +131,7 @@ void Circuit::find_links_gate(size_t size)
 void Circuit::find_chipsets(size_t size)
 {
     if (size > 0 && strcmp(this->tabFile[size - 1].c_str(), ".chipsets:") == 0)
-        for (;strcmp(this->tabFile[size + 1].c_str(), ".links:") != 0; size++) {
+        for (;strcmp(this->tabFile[size].c_str(), ".links:") != 0; size++) {
             find_gate(size);
             find_input(size);
             find_output(size);
@@ -122,11 +171,13 @@ int Circuit::parsing(int argc, std::vector<std::string> argv)
             if (strcmp(line.c_str(), ".links:") == 0 || strcmp(line.c_str(), ".chipsets:") == 0)
                 check_is_good++;
         }
-        //find_chipsets_and_links();
+        find_chipsets_and_links();
     } else {
         std::cout << "Bad file" << std::endl;
         return (84);
     }
+    if (put_input(argc, argv) == 84)
+        return (84);
     if (check_is_good != 2)
         return (84);
     return (1);

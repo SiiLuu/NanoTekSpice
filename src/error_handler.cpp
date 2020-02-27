@@ -26,10 +26,8 @@ int check_good_value(std::string str)
     }
     if (alphanumeric)
         return (1);
-    else {
-        std::cout << "Error: Input" << std::endl;
-        return (84);
-    }
+    std::cout << "Error: Input" << std::endl;
+    return (84);
 }
 
 int check_good_arguments(int argc, std::vector<std::string> argv)

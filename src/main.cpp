@@ -15,8 +15,8 @@ int main(int argc, char **argv)
     if (circ.parsing(argc, av) == 84)
         return (84);
     //circ.StartSimulation();
-    for (size_t i = 0; i <= circ.tabFile.size(); i++)
-        std::cout << circ.tabFile[i] << std::endl;
+    //for (size_t i = 0; i <= circ.tabFile.size(); i++)
+    //    std::cout << circ.tabFile[i] << std::endl;
 /*
     std::cout << "Chipsets: " << std::endl;
     for(auto it = circ.chipsets.cbegin(); it != circ.chipsets.cend(); ++it)
