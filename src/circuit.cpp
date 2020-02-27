@@ -33,7 +33,8 @@ int Circuit::StartSimulation(int argc, std::vector<std::string> argv)
     if (this->parse->parsing(argc, argv) == 84)
         return (84);
     std::signal(SIGINT, &Circuit::sig_handler);
-    Component *component = Factory::createComponent(4081, this->parse);
+    std::map<std::string, nts::Tristate>::iterator it = this->parse->chipsets.begin();
+    Component *component = Factory::createComponent(it->first, this->parse);
     component->simulate();
     component->display();
     DisplayPrompt();
