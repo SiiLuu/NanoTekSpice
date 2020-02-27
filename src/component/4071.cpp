@@ -5,16 +5,16 @@
 ** 4011.cpp
 */
 
-#include "4011.hpp"
+#include "4071.hpp"
 
-_4011::_4011(Parser *parse)
+_4071::_4071(Parser *parse)
 {
     this->_parse = parse;
 }
 
-_4011::~_4011() {}
+_4071::~_4071() {}
 
-void _4011::dump()
+void _4071::dump()
 {
     std::map<std::string, nts::Tristate>::iterator itI = _parse->input.begin();
     std::map<std::string, nts::Tristate>::iterator itO = _parse->output.begin();
@@ -33,7 +33,7 @@ void _4011::dump()
     }
 }
 
-void _4011::display()
+void _4071::display()
 {
     std::map<std::string, nts::Tristate>::iterator itO = _parse->output.begin();
     for(; itO != _parse->output.end(); ++itO) {
@@ -44,12 +44,11 @@ void _4011::display()
     }
 }
 
-void _4011::simulate()
+void _4071::simulate()
 {
     std::map<std::string, nts::Tristate>::iterator itI = _parse->input.begin();
     std::map<std::string, nts::Tristate>::iterator jtI = _parse->input.begin();
     std::map<std::string, nts::Tristate>::iterator itO = _parse->output.begin();
     ++jtI;
-    itO->second = and_gate(itI->second, jtI->second);
-    itO->second = not_gate(itO->second);
+    itO->second = or_gate(itI->second, jtI->second);
 }

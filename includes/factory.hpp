@@ -10,6 +10,10 @@
 
 #include <iostream>
 #include "4081.hpp"
+#include "4001.hpp"
+#include "4011.hpp"
+#include "4030.hpp"
+#include "4071.hpp"
 #include "component.hpp"
 
 class Factory {

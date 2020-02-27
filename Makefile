@@ -13,6 +13,9 @@ SRC	=	src/circuit.cpp			\
 		src/factory.cpp			\
 		src/component/4081.cpp 	\
 		src/component/4001.cpp 	\
+		src/component/4011.cpp 	\
+		src/component/4030.cpp 	\
+		src/component/4071.cpp 	\
 		src/error_handler.cpp 	\
 		src/main.cpp
 
