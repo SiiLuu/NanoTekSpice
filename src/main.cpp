@@ -14,7 +14,7 @@ int main(int argc, char **argv)
     std::vector<std::string> av(argv, argv + argc);
     if (circ.parsing(argc, av) == 84)
         return (84);
-    //circ.StartSimulation();
+    circ.StartSimulation();
     //for (size_t i = 0; i <= circ.tabFile.size(); i++)
     //    std::cout << circ.tabFile[i] << std::endl;
 /*
