@@ -5,11 +5,16 @@
 ** parse.cpp
 */
 
-#include "circuit.hpp"
+#include "parse.hpp"
 #include <algorithm>
 #include <cstring>
 
-bool Circuit::add_input_map(std::string str, int nbr)
+std::map<std::string, nts::Tristate> Parser::getInput(void)
+{
+    return (this->input);
+}
+
+bool Parser::add_input_map(std::string str, int nbr)
 {
     bool error = true;
 
@@ -28,7 +33,7 @@ bool Circuit::add_input_map(std::string str, int nbr)
     return (false);
 }
 
-int Circuit::put_input(int argc, std::vector<std::string> argv)
+int Parser::put_input(int argc, std::vector<std::string> argv)
 {
     bool good = false;
     bool error = false;
@@ -58,7 +63,7 @@ int Circuit::put_input(int argc, std::vector<std::string> argv)
     return (84);
 }
 
-void Circuit::find_gate(size_t size)
+void Parser::find_gate(size_t size)
 {
     std::string nbr;
     std::string name;
@@ -80,7 +85,7 @@ void Circuit::find_gate(size_t size)
         this->chipsets.insert(std::pair<std::string, int>(name, std::stoi(nbr)));
 }
 
-void Circuit::find_input(size_t size)
+void Parser::find_input(size_t size)
 {
     std::string name;
     bool found = false;
@@ -97,7 +102,7 @@ void Circuit::find_input(size_t size)
         this->input.insert(std::pair<std::string, nts::Tristate>(name, nts::Tristate::UNDEFINED));
 }
 
-void Circuit::find_output(size_t size)
+void Parser::find_output(size_t size)
 {
     std::string name;
     bool found = false;
@@ -114,7 +119,7 @@ void Circuit::find_output(size_t size)
         this->output.insert(std::pair<std::string, nts::Tristate>(name, nts::Tristate::UNDEFINED));
 }
 
-void Circuit::find_links_gate(size_t size)
+void Parser::find_links_gate(size_t size)
 {
     std::string str1;
     std::string str2;
@@ -128,7 +133,7 @@ void Circuit::find_links_gate(size_t size)
     this->links.insert(std::pair<std::string, std::string>(str1, str2));
 }
 
-void Circuit::find_chipsets(size_t size)
+void Parser::find_chipsets(size_t size)
 {
     if (size > 0 && strcmp(this->tabFile[size - 1].c_str(), ".chipsets:") == 0)
         for (;strcmp(this->tabFile[size].c_str(), ".links:") != 0; size++) {
@@ -138,14 +143,14 @@ void Circuit::find_chipsets(size_t size)
         }
 }
 
-void Circuit::find_links(size_t size)
+void Parser::find_links(size_t size)
 {
     if (size > 0 && strcmp(this->tabFile[size - 1].c_str(), ".links:") == 0)
         for (;size <= (this->tabFile.size() - 1); size++)
             find_links_gate(size);
 }
 
-void Circuit::find_chipsets_and_links()
+void Parser::find_chipsets_and_links()
 {
     for(size_t size = 0; size <= (this->tabFile.size() - 1); size++) {
         find_chipsets(size);
@@ -153,7 +158,7 @@ void Circuit::find_chipsets_and_links()
     }
 }
 
-int Circuit::parsing(int argc, std::vector<std::string> argv)
+int Parser::parsing(int argc, std::vector<std::string> argv)
 {
     std::fstream input;
     int check_is_good = 0;

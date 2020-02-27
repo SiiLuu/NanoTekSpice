@@ -5,9 +5,9 @@
 ** error_handler.c
 */
 
-#include "circuit.hpp"
+#include "parse.hpp"
 
-int check_good_value(std::string str)
+int Parser::check_good_value(std::string str)
 {
     bool good = false;
     bool alphanumeric = false;
@@ -30,7 +30,7 @@ int check_good_value(std::string str)
     return (84);
 }
 
-int check_good_arguments(int argc, std::vector<std::string> argv)
+int Parser::check_good_arguments(int argc, std::vector<std::string> argv)
 {
     if (argc < 2) {
         std::cout << "File is missing" << std::endl;
@@ -42,7 +42,7 @@ int check_good_arguments(int argc, std::vector<std::string> argv)
     return (1);
 }
 
-std::string removeBadChar (std::string str)
+std::string Parser::removeBadChar (std::string str)
 {
     std::string newStr;
     size_t size = 0;
