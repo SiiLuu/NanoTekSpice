@@ -27,10 +27,13 @@ void Circuit::DisplayPrompt()
     std::cout << "> ";
 }
 
-void Circuit::StartSimulation()
+int Circuit::StartSimulation(int argc, std::vector<std::string> argv)
 {
+    this->parse = new Parser;
+    if (this->parse->parsing(argc, argv) == 84)
+        return (84);
     std::signal(SIGINT, &Circuit::sig_handler);
-    Component *component = Factory::createComponent(4081);
+    Component *component = Factory::createComponent(4081);/*
     component->simulate();
     component->display();
     DisplayPrompt();
@@ -54,5 +57,6 @@ void Circuit::StartSimulation()
         }
         else
             DisplayPrompt();
-    }
+    }*/
+    return (1);
 }

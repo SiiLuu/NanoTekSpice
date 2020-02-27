@@ -9,6 +9,7 @@
 #define CIRCUIT_HPP_
 
 #include "IComponent.hpp"
+#include "parse.hpp"
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -18,7 +19,8 @@ class Circuit {
     public:
         Circuit();
         ~Circuit();
-        void StartSimulation();
+        int StartSimulation(int, std::vector<std::string>);
+        Parser *parse;
 
     protected:
         

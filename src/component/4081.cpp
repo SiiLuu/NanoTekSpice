@@ -6,14 +6,10 @@
 */
 
 #include "4081.hpp"
-#include "parse.hpp"
 
 _4081::_4081()
 {
-    Parser parse;
-
-    for(auto it = parse.getInput().begin(); it != parse.getInput().end(); ++it)
-        std::cout << it->first << " " << it->second << " " << "\n";
+    std::cout << "ici: " << this->parse->getI() << std::endl;
     setName("4081");
     setInputsName({"a", "b"});
     setOutputsName({"s"});

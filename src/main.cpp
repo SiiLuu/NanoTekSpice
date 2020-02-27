@@ -6,17 +6,14 @@
 */
 
 #include "circuit.hpp"
-#include "parse.hpp"
 
 int main(int argc, char **argv)
 {
     Circuit circ;
-    Parser parse;
 
     std::vector<std::string> av(argv, argv + argc);
-    if (parse.parsing(argc, av) == 84)
+    if (circ.StartSimulation(argc, av) == 84)
         return (84);
-    circ.StartSimulation();
     //for (size_t i = 0; i <= circ.tabFile.size(); i++)
     //    std::cout << circ.tabFile[i] << std::endl;
 /*

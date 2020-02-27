@@ -14,7 +14,7 @@ Factory::~Factory() {}
 Component *Factory::createComponent(int type)
 {
 	Component *component = nullptr;
-	
+
 	switch(type) {
 		case 4081:{
 			component = new _4081;

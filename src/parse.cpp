@@ -9,11 +9,6 @@
 #include <algorithm>
 #include <cstring>
 
-std::map<std::string, nts::Tristate> Parser::getInput(void)
-{
-    return (this->input);
-}
-
 bool Parser::add_input_map(std::string str, int nbr)
 {
     bool error = true;
@@ -158,11 +153,17 @@ void Parser::find_chipsets_and_links()
     }
 }
 
+int Parser::getI(void)
+{
+    return (this->i);
+}
+
 int Parser::parsing(int argc, std::vector<std::string> argv)
 {
     std::fstream input;
     int check_is_good = 0;
 
+    this->i = 0;
     if (check_good_arguments(argc, argv) == 84)
         return (84);
     input.open(argv[1]);

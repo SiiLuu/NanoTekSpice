@@ -21,8 +21,9 @@ class Parser {
         std::map<std::string, nts::Tristate> input;
         std::map<std::string, nts::Tristate> output;
         std::map<std::string, std::string> links;
+        int getI(void);
         int parsing(int, std::vector<std::string>);
-        std::map<std::string, nts::Tristate> getInput(void);
+        int i;
 
     protected:
     private:
@@ -40,4 +41,4 @@ class Parser {
         std::string removeBadChar (std::string str);
 };
 
-#endif /* !CIRCUIT_HPP_ */
+#endif /* !PARSER_HPP_ */
