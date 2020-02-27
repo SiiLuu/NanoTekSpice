@@ -46,8 +46,8 @@ void _4081::display()
 
 void _4081::simulate()
 {
-    //std::map<std::string, nts::Tristate>::iterator itI = parse->output.begin();
-    //std::map<std::string, nts::Tristate>::iterator itO = parse->output.begin();
-    //itO->second = and_gate();
-    //setOutputsValue({and_gate(getInputsValue(0), getInputsValue(1))});
+    std::map<std::string, nts::Tristate>::iterator itI = parse->input.begin();
+    std::map<std::string, nts::Tristate>::iterator jtI = parse->input.begin();
+    std::map<std::string, nts::Tristate>::iterator itO = parse->output.begin();
+    itO->second = and_gate(itI->second, jtI->second);
 }
