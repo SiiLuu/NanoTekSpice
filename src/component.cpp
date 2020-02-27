@@ -67,6 +67,46 @@ void Component::setOutputsName(std::vector<std::string> Input)
     OutputsName = Input;
 }
 
+bool Component::add_input(std::string str, int nbr, Parser *parse)
+{
+    bool error = true;
+
+    if (nbr >= 2)
+        return (true);
+    for(auto it = parse->input.begin(); it != parse->input.end(); ++it) {
+        if (it->first.find(str) == 0) {
+            it->second = static_cast<nts::Tristate>(nbr);
+            error = false;
+        }
+    }
+    if (error == true)
+        return (true);
+    return (false);
+}
+
+int Component::input_changes(Parser *parse, std::string str)
+{
+    std::string name;
+    std::string value;
+    bool good = false;
+    bool error = false;
+
+    for (size_t i = 0; i <= str.length(); i++) {
+        if (str[i] == '=') {
+            i++;
+            good = true;
+        }
+        if (!good)
+            name += str[i];
+        else
+            value += str[i];
+    }
+    error = add_input(name, std::stoi(value), parse);
+    if (good && !error)
+        return (1);
+    return (84);
+}
+
 nts::Tristate Component::and_gate(nts::Tristate a, nts::Tristate b)
 {
     if (a == nts::Tristate::TRUE && b == nts::Tristate::TRUE)

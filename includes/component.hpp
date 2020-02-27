@@ -15,6 +15,8 @@ class Component : public Circuit {
         virtual void dump() = 0;
         virtual void display() = 0;
         virtual void simulate() = 0;
+        int input_changes(Parser *, std::string);
+        bool add_input(std::string, int, Parser *);
 
     protected:
         std::string getName();
