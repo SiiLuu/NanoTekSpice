@@ -16,7 +16,7 @@ bool Parser::add_input_map(std::string str, int nbr)
     if (nbr >= 2)
         return (true);
     for(auto it = this->input.begin(); it != this->input.end(); ++it) {
-        if (it->first.find(str) == 0) {
+        if (it->first.compare(str) == 0) {
             it->second = static_cast<nts::Tristate>(nbr);
             error = false;
         }

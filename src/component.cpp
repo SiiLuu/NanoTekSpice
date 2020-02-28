@@ -14,7 +14,7 @@ bool Component::add_input(std::string str, int nbr, Parser *parse)
     if (nbr >= 2)
         return (true);
     for(auto it = parse->input.begin(); it != parse->input.end(); ++it) {
-        if (it->first.find(str) == 0) {
+        if (it->first.compare(str) == 0) {
             it->second = static_cast<nts::Tristate>(nbr);
             error = false;
         }
