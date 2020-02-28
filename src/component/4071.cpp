@@ -50,5 +50,12 @@ void _4071::simulate()
     std::map<std::string, nts::Tristate>::iterator jtI = _parse->input.begin();
     std::map<std::string, nts::Tristate>::iterator itO = _parse->output.begin();
     ++jtI;
-    itO->second = or_gate(itI->second, jtI->second);
+    while (itO != _parse->output.end()) {
+        itO->second = or_gate(itI->second, jtI->second);
+        ++itO;
+        ++itI;
+        ++itI;
+        ++jtI;
+        ++jtI;
+    }
 }
