@@ -18,7 +18,7 @@ void _4011::dump()
 {
     std::map<std::string, nts::Tristate>::iterator itI = _parse->input.begin();
     std::map<std::string, nts::Tristate>::iterator itO = _parse->output.begin();
-    std::cout << "4001" << " Dumped" << std::endl;
+    std::cout << "4011" << " Dumped" << std::endl;
     for(; itI != _parse->input.end(); ++itI) {
         if (itI->second == -1)
             std::cout << itI->first << "=U" << std::endl;
