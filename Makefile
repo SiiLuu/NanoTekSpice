@@ -11,11 +11,21 @@ SRC	=	src/circuit.cpp			\
 		src/gate.cpp			\
 		src/parse.cpp			\
 		src/factory.cpp			\
-		src/component/4081.cpp 	\
+		src/component/2716.cpp 	\
 		src/component/4001.cpp 	\
+		src/component/4008.cpp 	\
 		src/component/4011.cpp 	\
+		src/component/4013.cpp 	\
+		src/component/4017.cpp 	\
 		src/component/4030.cpp 	\
+		src/component/4040.cpp 	\
+		src/component/4069.cpp 	\
 		src/component/4071.cpp 	\
+		src/component/4081.cpp 	\
+		src/component/4094.cpp 	\
+		src/component/4503.cpp 	\
+		src/component/4512.cpp 	\
+		src/component/4514.cpp 	\
 		src/error_handler.cpp 	\
 		src/main.cpp
 
