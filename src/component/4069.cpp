@@ -47,9 +47,10 @@ void _4069::display()
 void _4069::simulate()
 {
     std::map<std::string, nts::Tristate>::iterator itI = _parse->input.begin();
-    std::map<std::string, nts::Tristate>::iterator jtI = _parse->input.begin();
     std::map<std::string, nts::Tristate>::iterator itO = _parse->output.begin();
-    ++jtI;
-    itO->second = or_gate(itI->second, jtI->second);
-    itO->second = not_gate(itO->second);
+    for (int i = 0; i < 6; i++) {
+        itO->second = not_gate(itI->second);
+        ++itO;
+        ++itI;
+    }
 }
