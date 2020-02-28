@@ -114,6 +114,23 @@ void Parser::find_output(size_t size)
         this->output.insert(std::pair<std::string, nts::Tristate>(name, nts::Tristate::UNDEFINED));
 }
 
+void Parser::find_clocks(size_t size)
+{
+    std::string name;
+    bool found = false;
+    int i = 0;
+
+    if (strncmp(this->tabFile[size].c_str(), "clock", 5) == 0) {
+        for (; this->tabFile[size][i] != ' '; i++);
+        i++;
+        for (; this->tabFile[size][i] != '\0' && this->tabFile[size][i] != ' '; i++)
+            name += this->tabFile[size][i];
+        found = true;
+    }
+    if (found)
+        this->output.insert(std::pair<std::string, nts::Tristate>(name, nts::Tristate::FALSE));
+}
+
 void Parser::find_links_gate(size_t size)
 {
     std::string str1;
@@ -135,6 +152,7 @@ void Parser::find_chipsets(size_t size)
             find_gate(size);
             find_input(size);
             find_output(size);
+            find_clocks(size);
         }
 }
 

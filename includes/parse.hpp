@@ -21,6 +21,7 @@ class Parser {
         std::map<std::string, nts::Tristate> input;
         std::map<std::string, nts::Tristate> output;
         std::map<std::string, std::string> links;
+        std::map<std::string, nts::Tristate> clock;
         int getI(void);
         int setI(void);
         int parsing(int, std::vector<std::string>);
@@ -33,6 +34,7 @@ class Parser {
         void find_gate(size_t size);
         void find_input(size_t size);
         void find_output(size_t size);
+        void find_clocks(size_t size);
         void find_links_gate(size_t size);
         bool add_input_map(std::string, int);
         int put_input(int, std::vector<std::string>);
