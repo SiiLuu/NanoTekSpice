@@ -14,6 +14,16 @@
 #include "4011.hpp"
 #include "4030.hpp"
 #include "4071.hpp"
+#include "2716.hpp"
+#include "4008.hpp"
+#include "4013.hpp"
+#include "4017.hpp"
+#include "4040.hpp"
+#include "4069.hpp"
+#include "4094.hpp"
+#include "4503.hpp"
+#include "4512.hpp"
+#include "4514.hpp"
 #include "component.hpp"
 
 class Factory {
