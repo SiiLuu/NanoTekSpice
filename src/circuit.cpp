@@ -56,7 +56,7 @@ int Circuit::StartSimulation(int argc, std::vector<std::string> argv)
             component->dump();
             DisplayPrompt();
         }
-        else if (_line.find('=') >= 1) {
+        else if (_line.find('=') != std::string::npos) {
             component->input_changes(this->parse, _line);
             DisplayPrompt();
         }
