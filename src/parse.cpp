@@ -22,6 +22,14 @@ bool Parser::add_input_map(std::string str, int nbr)
         }
     }
     if (error == true) {
+        for(auto it = this->clock.begin(); it != this->clock.end(); ++it) {
+            if (it->first.compare(str) == 0) {
+                it->second = static_cast<nts::Tristate>(nbr);
+                error = false;
+            }
+        }
+    }
+    if (error == true) {
         std::cout << "Error input" << std::endl;
         return (true);
     }
@@ -128,7 +136,41 @@ void Parser::find_clocks(size_t size)
         found = true;
     }
     if (found)
-        this->output.insert(std::pair<std::string, nts::Tristate>(name, nts::Tristate::FALSE));
+        this->clock.insert(std::pair<std::string, nts::Tristate>(name, nts::Tristate::UNDEFINED));
+}
+
+void Parser::find_true(size_t size)
+{
+    std::string name;
+    bool found = false;
+    int i = 0;
+
+    if (strncmp(this->tabFile[size].c_str(), "true", 5) == 0) {
+        for (; this->tabFile[size][i] != ' '; i++);
+        i++;
+        for (; this->tabFile[size][i] != '\0' && this->tabFile[size][i] != ' '; i++)
+            name += this->tabFile[size][i];
+        found = true;
+    }
+    if (found)
+        this->true_map.insert(std::pair<std::string, bool>(name, true));
+}
+
+void Parser::find_false(size_t size)
+{
+    std::string name;
+    bool found = false;
+    int i = 0;
+
+    if (strncmp(this->tabFile[size].c_str(), "false", 5) == 0) {
+        for (; this->tabFile[size][i] != ' '; i++);
+        i++;
+        for (; this->tabFile[size][i] != '\0' && this->tabFile[size][i] != ' '; i++)
+            name += this->tabFile[size][i];
+        found = true;
+    }
+    if (found)
+        this->false_map.insert(std::pair<std::string, bool>(name, false));
 }
 
 void Parser::find_links_gate(size_t size)
@@ -153,6 +195,8 @@ void Parser::find_chipsets(size_t size)
             find_input(size);
             find_output(size);
             find_clocks(size);
+            find_true(size);
+            find_false(size);
         }
 }
 
@@ -195,6 +239,8 @@ int Parser::parsing(int argc, std::vector<std::string> argv)
         return (84);
     }
     if (put_input(argc, argv) == 84)
+        return (84);
+    if (all_value_set() == 84)
         return (84);
     if (check_is_good != 2)
         return (84);

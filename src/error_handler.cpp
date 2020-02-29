@@ -62,3 +62,24 @@ std::string Parser::removeBadChar (std::string str)
     }
     return (newStr);
 }
+
+int Parser::all_value_set(void)
+{
+    bool error = false;
+
+    for(auto it = input.cbegin(); it != input.cend(); ++it) {
+        if (it->second == nts::Tristate::UNDEFINED) {
+            std::cout << it->first << " is not set." << std::endl;
+            error = true;
+        }
+    }
+    for(auto it = clock.cbegin(); it != clock.cend(); ++it) {
+        if (it->second == nts::Tristate::UNDEFINED) {
+            error = true;
+            std::cout << it->first << " is not set." << std::endl;
+        }
+    }
+    if (error == true)
+        return (84);
+    return (1);
+}
