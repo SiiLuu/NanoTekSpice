@@ -24,6 +24,29 @@ bool Component::add_input(std::string str, int nbr, Parser *parse)
     return (false);
 }
 
+int Component::check_error(std::string str)
+{
+    bool good = false;
+    bool alphanumeric = false;
+
+    for (size_t i = 0; i <= str.length(); i++) {
+        if (str[i] == '=') {
+            good = true;
+            i++;
+        }
+        if (good && str[i] != '\0') {
+            if (isdigit(str[i]) == 0)
+                alphanumeric = false;
+            else
+                alphanumeric = true;
+        }
+    }
+    if (alphanumeric)
+        return (1);
+    std::cout << "Error : value" << std::endl;
+    return (84);
+}
+
 int Component::input_changes(Parser *parse, std::string str)
 {
     std::string name;
@@ -31,6 +54,8 @@ int Component::input_changes(Parser *parse, std::string str)
     bool good = false;
     bool error = false;
 
+    if (check_error(str) == 84)
+        return (84);
     for (size_t i = 0; i <= str.length(); i++) {
         if (str[i] == '=') {
             i++;
