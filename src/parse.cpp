@@ -217,13 +217,13 @@ void Parser::find_chipsets_and_links()
 
 int Parser::parsing(int argc, std::vector<std::string> argv)
 {
-    std::fstream input;
+    std::filebuf fb;
     int check_is_good = 0;
 
     if (check_good_arguments(argc, argv) == 84)
         return (84);
-    input.open(argv[1]);
-    if (input && !input.fail()) {
+    if (fb.open(argv[1], std::ios::in)) {
+        std::istream input(&fb);
         for(std::string line; getline(input,line);) {
             line = removeBadChar(line);
             if (strcmp(line.c_str(), "") == 0)
