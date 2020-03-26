@@ -6,6 +6,7 @@
 */
 
 #include "parse.hpp"
+#include "exception.hpp"
 
 int Parser::check_good_value(std::string str)
 {
@@ -34,11 +35,15 @@ int Parser::check_good_arguments(int argc, std::vector<std::string> argv)
 {
     if (argc < 2) {
         std::cout << "File is missing" << std::endl;
-        return (84);
+        throw Exception ("Arguments not valid");
+        return (1);
     }
-    for (int i = 2; i < argc; i++)
-        if (check_good_value(argv[i]) == 84)
-            return (84);
+    for (int i = 2; i < argc; i++) {
+        if (check_good_value(argv[i]) == 84) {
+            throw Exception ("Arguments not valid");
+            return (1);
+        }
+    }
     return (1);
 }
 
@@ -80,6 +85,6 @@ int Parser::all_value_set(void)
         }
     }
     if (error == true)
-        return (84);
+        throw Exception ("All value are not set");
     return (1);
 }

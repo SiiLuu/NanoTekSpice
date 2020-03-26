@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include "circuit.hpp"
 #include "factory.hpp"
+#include "exception.hpp"
 
 bool LOOP = true;
 
@@ -27,11 +28,16 @@ void Circuit::DisplayPrompt()
     std::cout << "> ";
 }
 
-int Circuit::StartSimulation(int argc, std::vector<std::string> argv)
+void Circuit::StartSimulation(int argc, std::vector<std::string> argv)
 {
     this->parse = new Parser;
-    if (this->parse->parsing(argc, argv) == 84)
-        return (84);
+    try {
+        this->parse->parsing(argc, argv);
+    }
+    catch (Exception &e) {
+        std::cout << e.what() << std::endl;
+        exit (84);
+    }
     std::signal(SIGINT, &Circuit::sig_handler);
     std::map<std::string, int>::iterator it = this->parse->chipsets.begin();
     Component *component = Factory::createComponent(it->second, this->parse);
@@ -63,5 +69,4 @@ int Circuit::StartSimulation(int argc, std::vector<std::string> argv)
         else
             DisplayPrompt();
     }
-    return (1);
 }

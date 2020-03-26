@@ -5,6 +5,7 @@
 ** parse.cpp
 */
 
+#include "exception.hpp"
 #include "parse.hpp"
 #include <algorithm>
 #include <cstring>
@@ -63,7 +64,8 @@ int Parser::put_input(int argc, std::vector<std::string> argv)
     }
     if (good && !error)
         return (1);
-    return (84);
+    throw Exception ("Error in input");
+    return (1);
 }
 
 void Parser::find_gate(size_t size)
@@ -220,8 +222,13 @@ int Parser::parsing(int argc, std::vector<std::string> argv)
     std::filebuf fb;
     int check_is_good = 0;
 
-    if (check_good_arguments(argc, argv) == 84)
-        return (84);
+    try {
+        check_good_arguments(argc, argv);
+    }
+    catch (Exception &e) {
+        std::cout << e.what() << std::endl;
+        exit (84);
+    }
     if (fb.open(argv[1], std::ios::in)) {
         std::istream input(&fb);
         for(std::string line; getline(input,line);) {
@@ -234,15 +241,23 @@ int Parser::parsing(int argc, std::vector<std::string> argv)
                 check_is_good++;
         }
         find_chipsets_and_links();
-    } else {
-        std::cout << "Bad file" << std::endl;
-        return (84);
+    } else
+        throw Exception ("Bad file");
+    try {
+        put_input(argc, argv);
     }
-    if (put_input(argc, argv) == 84)
-        return (84);
-    if (all_value_set() == 84)
-        return (84);
+    catch (Exception &e) {
+        std::cout << e.what() << std::endl;
+        exit (84);
+    }
+    try {
+        all_value_set();
+    }
+    catch (Exception &e) {
+        std::cout << e.what() << std::endl;
+        exit (84);
+    }
     if (check_is_good != 2)
-        return (84);
+        throw Exception ("Bad arguments");
     return (1);
 }

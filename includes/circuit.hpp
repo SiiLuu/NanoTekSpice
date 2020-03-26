@@ -19,7 +19,7 @@ class Circuit {
     public:
         Circuit();
         ~Circuit();
-        int StartSimulation(int, std::vector<std::string>);
+        void StartSimulation(int, std::vector<std::string>);
         Parser *parse;
 
     protected:
