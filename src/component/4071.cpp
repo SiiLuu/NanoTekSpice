@@ -49,13 +49,33 @@ void _4071::simulate()
     std::map<std::string, nts::Tristate>::iterator itI = _parse->input.begin();
     std::map<std::string, nts::Tristate>::iterator jtI = _parse->input.begin();
     std::map<std::string, nts::Tristate>::iterator itO = _parse->output.begin();
+    nts::Tristate temp;
+    nts::Tristate temp2;
+    nts::Tristate temp3;
     ++jtI;
-    while (itO != _parse->output.end()) {
+    if (_parse->input.size() <= 2)
         itO->second = or_gate(itI->second, jtI->second);
-        ++itO;
-        ++itI;
-        ++itI;
+    else if (_parse->chipsets.size() > 1) {
+        temp = or_gate(itI->second, jtI->second);
         ++jtI;
         ++jtI;
+        ++itI;
+        ++itI;
+        temp2 = or_gate(itI->second, jtI->second);
+        ++jtI;
+        temp3 = or_gate(temp, temp2); 
+        itO->second = or_gate(temp3, jtI->second);
+        itO->second = not_gate(itO->second);
+    }
+    else {
+        temp = or_gate(itI->second, jtI->second);
+        ++jtI;
+        ++jtI;
+        ++itI;
+        ++itI;
+        temp2 = or_gate(itI->second, jtI->second);
+        ++jtI;
+        temp3 = or_gate(temp, temp2);
+        itO->second = or_gate(temp3, jtI->second);
     }
 }
