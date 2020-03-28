@@ -10,7 +10,7 @@
 
 #include "circuit.hpp"
 
-class Component : public Circuit {
+class Component : public nts::IComponent {
     public:
         virtual void dump() = 0;
         virtual void display() = 0;

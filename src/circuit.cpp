@@ -69,4 +69,6 @@ void Circuit::StartSimulation(int argc, std::vector<std::string> argv)
         else
             DisplayPrompt();
     }
+    delete component;
+    delete parse;
 }
