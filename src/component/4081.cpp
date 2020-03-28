@@ -55,7 +55,7 @@ void _4081::simulate()
     ++jtI;
     if (_parse->input.size() <= 2)
         itO->second = and_gate(itI->second, jtI->second);
-    else if (_parse->chipsets.size() > 1) {
+    else {
         temp = and_gate(itI->second, jtI->second);
         ++jtI;
         ++jtI;
@@ -65,17 +65,7 @@ void _4081::simulate()
         ++jtI;
         temp3 = and_gate(temp, temp2); 
         itO->second = and_gate(temp3, jtI->second);
-        itO->second = not_gate(itO->second);
-    }
-    else {
-        temp = and_gate(itI->second, jtI->second);
-        ++jtI;
-        ++jtI;
-        ++itI;
-        ++itI;
-        temp2 = and_gate(itI->second, jtI->second);
-        ++jtI;
-        temp3 = and_gate(temp, temp2);
-        itO->second = and_gate(temp3, jtI->second);
+        if (_parse->chipsets.size() > 1)
+            itO->second = not_gate(itO->second);
     }
 }
